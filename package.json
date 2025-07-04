@@ -1,0 +1,35 @@
+{
+  "name": "weatherapiwrapper",
+  "version": "1.0.0",
+  "description": "RESTful api wrapping popular open sourse weather API: (tbd)",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tsc",
+    "start": "npm run build && node .",
+    "dev": "nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sidesbutgithub/RESTfulWeatherApiWrapper.git"
+  },
+  "type": "commonjs",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sidesbutgithub/RESTfulWeatherApiWrapper/issues"
+  },
+  "homepage": "https://github.com/sidesbutgithub/RESTfulWeatherApiWrapper#readme",
+  "dependencies": {
+    "dotenv": "^17.0.1",
+    "express": "^5.1.0",
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.10",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2"
+  }
+}
