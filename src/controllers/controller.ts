@@ -34,10 +34,7 @@ async function fetchForcast(req: Request, res: Response, next: Function){
         res.locals.data = await response.json();
         const cache = req.app.locals.cache;
         if (cache){
-            const todayEnd = Math.floor((new Date().setHours(23, 59, 59, 999))/1000);
-            const now = Math.floor((Date.now())/1000)
-            await cache.set(location, JSON.stringify(res.locals.data), {EX: todayEnd-now});
-            //console.log(`weather for ${location} cached`)
+            await cache.set(location, JSON.stringify(res.locals.data), {EXAT: Math.floor((new Date().setHours(23, 59, 59, 999))/1000)});
         }
         res.status(200).json(res.locals.data);
         
