@@ -18,6 +18,7 @@ async function checkCache(req: Request, res: Response, next: Function){
         next("route");
         return;
     }
+    //console.log(`weather for ${location} retrieved from cache`)
     res.status(200).json(data);
 }
 
@@ -36,6 +37,7 @@ async function fetchForcast(req: Request, res: Response, next: Function){
             const todayEnd = Math.floor((new Date().setHours(23, 59, 59, 999))/1000);
             const now = Math.floor((Date.now())/1000)
             await cache.set(location, JSON.stringify(res.locals.data), {EX: todayEnd-now});
+            //console.log(`weather for ${location} cached`)
         }
         res.status(200).json(res.locals.data);
         

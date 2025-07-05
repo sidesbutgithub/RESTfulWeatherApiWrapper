@@ -21,7 +21,9 @@ app.use(limiter);
 app.locals.cache = null;
 
 //app cannot start listening until connection to cache is established due to the cache automatically trying to reconnection
-const client = await createClient()
+const client = await createClient({
+    url: `redis://${process.env.REDIS_HOST || '127.0.0.1'}:${process.env.REDIS_PORT || 6379}`,
+})
     .on("error", (err) => {
         console.log("Redis Client Error, Cache Unavailable", err);
         app.locals.cache = null;
