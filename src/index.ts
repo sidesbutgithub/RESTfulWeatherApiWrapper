@@ -1,76 +1,41 @@
-#!/usr/bin/env ts-node
+#!/usr/bin/env node
 
 import express from "express";
 import dotenv from "dotenv";
+import { weatherRouter } from "./routes/weather.js"
+import { createClient } from "redis";
+
+
 
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT;
-const apiAddress = process.env.API_ADDRESS;
-const apiKey = process.env.API_KEY;
+const port = process.env.PORT || 3000;
+
+app.locals.cache = null;
+
+const client = await createClient()
+    .on("error", (err) => {
+        console.log("Redis Client Error, Cache Unavailable", err);
+        app.locals.cache = null;
+    })
+    .connect();
+
+app.locals.cache = client;
+
 
 app.use(express.json());
 
-app.get("/:location", async (req, res) => {
-    const {location} = req.params;
+app.use("/weather", weatherRouter);
 
-    try{
-        const response = await fetch(`${apiAddress}${location}?key=${apiKey}`);
-        if (!response.ok){
-            throw new Error(`Response status: ${response.status}`);
-        }
-        const data = await response.json();
-        res.status(200).json({"data": data});
-    }
-    catch (e){
-        console.log(e)
-        res.status(400).send(e)
-    }
+app.use("/", (req, res) => {
+    res.status(404).send("Resourse Not Found");
+})
 
-
-});
-
-app.get("/:location/:date1", async (req, res) => {
-    const {location, date1} = req.params;
-    
-    try{
-        const response = await fetch(`${apiAddress}${location}/${date1}?key=${apiKey}`);
-        if (!response.ok){
-            throw new Error(`Response status: ${response.status}`);
-        }
-        const data = await response.json();
-        res.status(200).json({"data": data});
-    }
-    catch (e){
-        console.log(e)
-        res.status(400).send(e)
-    }
-});
-
-app.get("/:location/:date1/:date2", async (req, res) => {
-    const {location, date1, date2} = req.params;
-    
-    try{
-        const response = await fetch(`${apiAddress}${location}/${date1}/${date2}?key=${apiKey}`);
-        if (!response.ok){
-            throw new Error(`Response status: ${response.status}`);
-        }
-        const data = await response.json();
-        res.status(200).json({"data": data});
-    }
-    catch (e){
-        console.log(e)
-        res.status(400).send(e)
-    }
-});
-
-app.get("/", (req, res) => {
-    res.status(400).send("Location is a required route")
-});
-
-app.all("/*splat", (res, req) => {
-    req.status(404).send("Resourse Not Found");
+app.all("/*splat", (req, res) => {
+    console.log("huh")
+    console.log(typeof res);
+    res.status(404).send("Resourse Not Found");
 })
 
 app.listen(port, () => console.log(`listening on port ${port}`));
