@@ -9,9 +9,9 @@ RESTful api wrapping open sourse weather API: VisualCrossing
 
 ## Set-up
 ### Installation
-Clone the repo with git (or download the project manually), cd into the directory and run `npm install` to install dependancies and `npm run build` to build the Node JS files
+Clone the repo with git using `https://github.com/sidesbutgithub/RESTfulWeatherApiWrapper.git` (or download the project manually), cd into the directory and run `npm install` to install dependancies and `npm run build` to build the Node JS files
 ```
-git clone https://github.com/sidesbutgithub/RESTfulWeatherApiWrapper
+git clone https://github.com/sidesbutgithub/RESTfulWeatherApiWrapper.git
 cd RESTfulWeatherApiWrapper
 npm install
 npm run build
