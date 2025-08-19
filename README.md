@@ -8,7 +8,7 @@ RESTful api wrapping open sourse weather API: VisualCrossing
 4. (Optional but recommended) git for repo cloning
 
 ## Set-up
-# Installation
+### Installation
 Clone the repo with git (or download the project manually), cd into the directory and run `npm install` to install dependancies and `npm run build` to build the Node JS files
 ```
 git clone https://github.com/sidesbutgithub/RESTfulWeatherApiWrapper
@@ -17,7 +17,7 @@ npm install
 npm run build
 ```
 
-# .env file
+### .env file
 Create a file named .env containing the following environment variables in the root directory of the project
 ```
 PORT = <the port which you want your api to be accessed from>
@@ -27,11 +27,11 @@ REDIS_HOST = <the address at which your redis database is hosted>
 REDIS_PORT = <the port at which your redis database is accessed>
 ```
 
-# Usage
+## Usage
 In the root directory of the project, run `node .` to start the api  
 In the terminal you should see `listening on port <port assigned in .env>`
 
-## Routes
+### Routes
 ```
 /weather/<location>
 ```
