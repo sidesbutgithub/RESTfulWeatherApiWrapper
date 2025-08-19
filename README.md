@@ -31,7 +31,7 @@ REDIS_PORT = <the port at which your redis database is accessed>
 In the root directory of the project, run `node .` to start the api  
 In the terminal you should see `listening on port <port assigned in .env>`
 ```
-node ,
+node .
 ```
 ### Routes
 ```
